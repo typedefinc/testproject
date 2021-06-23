@@ -4,21 +4,22 @@ namespace App\Controllers;
 
 use App\Base\BasicAuth;
 use App\Base\Controller;
-use App\Models\MainModel;
+use App\Models\ListModel;
 
 class MainController extends Controller
 {
 
     public function indexAction()
     {
-        $model = new MainModel();
-        $data = $model->get_data();
+        $model = new ListModel();
+        $data = $model->getData();
         $this->render("index", "main", $data);
     }
     public function addAction()
     {
         if (!empty($_POST['start']) && !empty($_POST['end'])) {
-            $model = new MainModel();
+            $model = new ListModel();
+            $model->author = $_SERVER['PHP_AUTH_USER'];
             $model->start = $_POST['start'];
             $model->end = $_POST['end'];
             $model->save();
@@ -28,7 +29,7 @@ class MainController extends Controller
     public function editAction()
     {
         if (BasicAuth::isAdmin()) {
-            MainModel::editCheck($_GET['id']);
+            ListModel::editCheck($_GET['id']);
         }
         $this->home();
     }
