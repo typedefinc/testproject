@@ -8,7 +8,7 @@ class Model
     {
         return new \PDO("sqlite:db/database.db");
     }
-    public static function get($table, $data = "*", $param = '')
+    public static function get($table, $data = "*")
     {
         $db = Model::connectSqliteDB();
         $sql = "SELECT $data FROM $table";
