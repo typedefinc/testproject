@@ -4,21 +4,22 @@ namespace App\Base;
 
 class Model
 {
-    public static function connectSqliteDB()
+    private $db;
+
+    public function __construct()
     {
-        return new \PDO("sqlite:db/database.db");
+        $this->$db = new \PDO("sqlite:db/database.db");
     }
-    public static function get($table, $data = "*")
+
+    public function get($table, $data = "*")
     {
-        $db = Model::connectSqliteDB();
         $sql = "SELECT $data FROM $table";
-        $result = $db->query($sql);
+        $result = $this->$db->query($sql);
         return $result;
-        $db = null;
     }
-    public static function set($table, $data = [])
+
+    public function insert($table, $data = [])
     {
-        $db = Model::connectSqliteDB();
         if ($data) {
             $count = count($data);
             $sqlData = "INSERT INTO `$table` (";
@@ -42,17 +43,17 @@ class Model
             }
             $sqlData .= ")";
         }
-        $stmt = $db->prepare($sqlData);
+        $stmt = $this->$db->prepare($sqlData);
         $stmt->execute();
     }
-    public static function edit($table, $id)
+
+    public function update($table, $id)
     {
-        $db = Model::connectSqliteDB();
         $sql = "SELECT `check` FROM $table WHERE id='$id'";
-        $result = $db->query($sql);
+        $result = $this->$db->query($sql);
         $curst = !$result->fetchAll(\PDO::FETCH_ASSOC)[0]['check'];
         $sql = "UPDATE $table SET `check`='$curst' WHERE id='$id'";
-        $db->prepare($sql)->execute();
-        $db = null;
+        $this->$db->prepare($sql)->execute();
     }
+
 }

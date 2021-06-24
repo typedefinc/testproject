@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tests for the \PHP_CodeSniffer\Files\File:findExtendedClassName method.
  *
@@ -31,7 +32,6 @@ class FindExtendedClassNameTest extends AbstractMethodUnitTest
         $OOToken = $this->getTargetToken($identifier, [T_CLASS, T_ANON_CLASS, T_INTERFACE]);
         $result  = self::$phpcsFile->findExtendedClassName($OOToken);
         $this->assertSame($expected, $result);
-
     }//end testFindExtendedClassName()
 
 
@@ -86,8 +86,5 @@ class FindExtendedClassNameTest extends AbstractMethodUnitTest
                 'testFECNClass',
             ],
         ];
-
     }//end dataExtendedClass()
-
-
 }//end class

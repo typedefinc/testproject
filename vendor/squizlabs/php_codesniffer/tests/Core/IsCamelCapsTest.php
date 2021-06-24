@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tests for the \PHP_CodeSniffer\Util\Common::isCamelCaps method.
  *
@@ -25,7 +26,6 @@ class IsCamelCapsTest extends TestCase
     {
         $this->assertTrue(Common::isCamelCaps('thisIsCamelCaps', false, true, true));
         $this->assertTrue(Common::isCamelCaps('thisISCamelCaps', false, true, false));
-
     }//end testValidNotClassFormatPublic()
 
 
@@ -48,7 +48,6 @@ class IsCamelCapsTest extends TestCase
         $this->assertFalse(Common::isCamelCaps('this-IsCamelCaps', false, true, true));
         $this->assertFalse(Common::isCamelCaps('this_IsCamelCaps', false, true, true));
         $this->assertFalse(Common::isCamelCaps('this_is_camel_caps', false, true, true));
-
     }//end testInvalidNotClassFormatPublic()
 
 
@@ -63,7 +62,6 @@ class IsCamelCapsTest extends TestCase
         $this->assertTrue(Common::isCamelCaps('_thisISCamelCaps', false, false, false));
         $this->assertTrue(Common::isCamelCaps('_i18N', false, false, true));
         $this->assertTrue(Common::isCamelCaps('_i18n', false, false, true));
-
     }//end testValidNotClassFormatPrivate()
 
 
@@ -84,7 +82,6 @@ class IsCamelCapsTest extends TestCase
         $this->assertFalse(Common::isCamelCaps('*thisIsCamelCaps', false, false, true));
         $this->assertFalse(Common::isCamelCaps('-thisIsCamelCaps', false, false, true));
         $this->assertFalse(Common::isCamelCaps('_this_is_camel_caps', false, false, true));
-
     }//end testInvalidNotClassFormatPrivate()
 
 
@@ -98,7 +95,6 @@ class IsCamelCapsTest extends TestCase
         $this->assertTrue(Common::isCamelCaps('ThisIsCamelCaps', true, true, true));
         $this->assertTrue(Common::isCamelCaps('ThisISCamelCaps', true, true, false));
         $this->assertTrue(Common::isCamelCaps('This3IsCamelCaps', true, true, false));
-
     }//end testValidClassFormatPublic()
 
 
@@ -112,7 +108,6 @@ class IsCamelCapsTest extends TestCase
         $this->assertFalse(Common::isCamelCaps('thisIsCamelCaps', true));
         $this->assertFalse(Common::isCamelCaps('This-IsCamelCaps', true));
         $this->assertFalse(Common::isCamelCaps('This_Is_Camel_Caps', true));
-
     }//end testInvalidClassFormat()
 
 
@@ -128,8 +123,5 @@ class IsCamelCapsTest extends TestCase
     {
         $this->assertFalse(Common::isCamelCaps('_ThisIsCamelCaps', true, true));
         $this->assertFalse(Common::isCamelCaps('_ThisIsCamelCaps', true, false));
-
     }//end testInvalidClassFormatPrivate()
-
-
 }//end class

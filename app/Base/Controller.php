@@ -11,12 +11,15 @@ class Controller
     {
         include_once "app/Views/layout/" . $template . ".php";
     }
+
     public function home()
     {
         $this->redirect("/");
     }
+
     public function redirect($url)
     {
         header("Location:$url");
     }
+
 }

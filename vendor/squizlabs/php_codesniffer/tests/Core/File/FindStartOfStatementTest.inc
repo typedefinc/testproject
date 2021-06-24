@@ -10,11 +10,13 @@ $a = doSomething();
 $a = doSomething($a, $b);
 
 /* testControlStructure */
-while(true) {}
+while (true) {
+}
 $a = 1;
 
 /* testClosureAssignment */
-$a = function($b=false;){};
+$a = function ($b = false;) {
+};
 
 /* testHeredocFunctionArg */
 myFunction(<<<END
@@ -23,15 +25,19 @@ END
 , 'bar');
 
 switch ($a) {
-    case 1: {break;}
-    case 2: $foo = true; break;
-    default: {break;}
+    case 1: {break;
+    }
+    case 2:
+        $foo = true;
+        break;
+    default: {break;
+    }
     /* testSwitch */
 }
 
 /* testStatementAsArrayValue */
-$a = [new Datetime];
-$a = array(new Datetime);
+$a = [new Datetime()];
+$a = array(new Datetime());
 $a = ['a' => $foo + $bar, 'b' => true];
 
 /* testUseGroup */
@@ -87,8 +93,10 @@ $result = match (true) {
 
 /* testMatchClosure */
 $result = match ($key) {
-    1 => function($a, $b) {},
-    2 => function($b, $c) {},
+    1 => function ($a, $b) {
+    },
+    2 => function ($b, $c) {
+    },
 };
 
 /* testMatchArray */

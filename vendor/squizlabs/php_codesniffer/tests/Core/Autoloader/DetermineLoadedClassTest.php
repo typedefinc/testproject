@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tests for the \PHP_CodeSniffer\Util\Common::isCamelCaps method.
  *
@@ -22,8 +23,7 @@ class DetermineLoadedClassTest extends TestCase
      */
     public static function setUpBeforeClass()
     {
-        include __DIR__.'/TestFiles/Sub/C.inc';
-
+        include __DIR__ . '/TestFiles/Sub/C.inc';
     }//end setUpBeforeClass()
 
 
@@ -53,7 +53,6 @@ class DetermineLoadedClassTest extends TestCase
 
         $className = \PHP_CodeSniffer\Autoload::determineLoadedClass($classesBeforeLoad, $classesAfterLoad);
         $this->assertEquals('PHP_CodeSniffer\Tests\Core\Autoloader\Sub\C', $className);
-
     }//end testOrdered()
 
 
@@ -111,8 +110,5 @@ class DetermineLoadedClassTest extends TestCase
 
         $className = \PHP_CodeSniffer\Autoload::determineLoadedClass($classesBeforeLoad, $classesAfterLoad);
         $this->assertEquals('PHP_CodeSniffer\Tests\Core\Autoloader\Sub\C', $className);
-
     }//end testUnordered()
-
-
 }//end class

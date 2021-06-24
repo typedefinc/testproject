@@ -4,6 +4,7 @@ namespace App\Base;
 
 class Route
 {
+
     public static function run()
     {
         $contrName = 'main';
@@ -29,6 +30,7 @@ class Route
             Route::errorPage404();
         }
     }
+
     public function errorPage404()
     {
         $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
@@ -37,4 +39,5 @@ class Route
         header('Location:' . $host . '404');
         echo 32;
     }
+
 }
