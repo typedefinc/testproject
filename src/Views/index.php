@@ -2,17 +2,14 @@
 
 namespace App\Views;
 
-use App\Base\BasicAuth;
-
 ?>
 
 <div class='container'>
 <div class="header">
     <h1>Список</h1>
-    <h2><?=BasicAuth::isAdmin() ? Админ : Пользователь?></h1>
+    <h2></h1>
 </div>
-<?php if (BasicAuth::isAuth() && !BasicAuth::isAdmin()) {?>
-    <form class="form-add" action="main/add" method="POST">
+    <form class="form-add" action="/add" method="POST">
     <div class="fieldsstart">
         <div class='fields'>
             <label for="start">Начало</label>
@@ -29,7 +26,6 @@ use App\Base\BasicAuth;
     </div>
     <input class="btn btn-success add-button" type="submit" value="Добавить">
 </form>
-<?php }?>
 
 <div class='center-block'>
     <table class="table">
@@ -46,8 +42,8 @@ use App\Base\BasicAuth;
                 <th><?=$list->start;?></th>
                 <th><?=$list->end;?></th>
                 <th>
-                    <?php if (BasicAuth::isAdmin()) : ?>
-                            <a href="main\edit?id=<?=$list->id?>"><?=$list->check ? 'Утвержден' : 'Не утвержден'?></a>
+                    <?php if (true) : ?>
+                            <a class='status' href="/edit/<?=$list->id?>"><?=$list->check ? 'Утвержден' : 'Не утвержден'?></a>
                     <?php else : ?>
                             <?=$list->check ? 'Утвержден' : 'Не утвержден'?>
                     <?php endif;?>

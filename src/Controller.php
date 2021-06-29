@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Base;
+namespace App;
 
 class Controller
 {
-    public $model;
-    public $view;
 
     public function render($content, $template, $data = null)
     {
-        include_once "app/Views/layout/" . $template . ".php";
+        include_once "Views/layout/" . $template . ".php";
     }
 
     public function home()
@@ -21,5 +19,4 @@ class Controller
     {
         header("Location:$url");
     }
-
 }

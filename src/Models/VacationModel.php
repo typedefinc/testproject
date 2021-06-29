@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Base\Model;
+use App\Model;
 
 class VacationModel extends Model
 {
@@ -11,21 +11,22 @@ class VacationModel extends Model
     public $start;
     public $end;
 
+    private $table = 'vacation';
+
     public function getData()
     {
-        return $this->get('vacation')->fetchAll(\PDO::FETCH_CLASS);
+        return $this->get($this->table)->fetchAll(\PDO::FETCH_CLASS);
     }
 
     public function save()
     {
-        $this->insert('vacation', ['author' => $this->author,'start' => $this->start,'end' => $this->end]);
+        $this->insert($this->table, ['author' => $this->author,'start' => $this->start,'end' => $this->end]);
     }
 
     public function editCheck($id)
     {
         if ($id) {
-            $this->update("vacation", $id);
+            $this->update($this->table, $id);
         }
     }
-
 }

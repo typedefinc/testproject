@@ -1,0 +1,8 @@
+[2021-06-29T13:47:12.358962+03:00] baseLogger.INFO: Query: UPDATE vacation SET `check`='1' WHERE id='21'. Change record with id:21 [] []
+[2021-06-29T13:47:17.736123+03:00] baseLogger.INFO: Query: INSERT INTO `vacation` (`author`,`start`,`end`) VALUES('user','09.06.2021','04.06.2021'). Add new record. [] []
+[2021-06-29T13:48:04.438555+03:00] baseLogger.INFO: Get data [] []
+[2021-06-29T13:48:15.739014+03:00] baseLogger.INFO: Get data [] []
+[2021-06-29T13:48:23.134472+03:00] baseLogger.INFO: Query: UPDATE vacation SET `check`='' WHERE id='22'. Change record with id:22 [] []
+[2021-06-29T13:48:23.160995+03:00] baseLogger.INFO: Get data [] []
+[2021-06-29T13:48:23.804046+03:00] baseLogger.INFO: Query: UPDATE vacation SET `check`='1' WHERE id='22'. Change record with id:22 [] []
+[2021-06-29T13:48:23.832383+03:00] baseLogger.INFO: Get data [] []
