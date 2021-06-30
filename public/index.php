@@ -3,25 +3,24 @@
 use Slim\Factory\AppFactory;
 use DI\ContainerBuilder;
 
+define('APP_ENV', 'dev');
+
 require __DIR__ . '/../vendor/autoload.php';
 
 $containerBuilder = new ContainerBuilder();
-$dependencies = require __DIR__ . '/../app/dependencies.php';
-$dependencies($containerBuilder);
+
+$containerBuilder->addDefinitions(require __DIR__ . '/../config/dependencies.php');
 
 $container = $containerBuilder->build();
 
 AppFactory::setContainer($container);
 
-$settings = require __DIR__ . '/../app/settings.php';
-$settings($container);
-
 $app = AppFactory::create();
 
-$middlewear = require __DIR__ . '/../app/middlewear.php';
+$middlewear = require __DIR__ . '/../config/middleware.php';
 $middlewear($app);
 
-$route = require __DIR__ . '/../app/routes.php';
+$route = require __DIR__ . '/../config/routes.php';
 $route($app);
 
 $app->run();

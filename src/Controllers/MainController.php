@@ -17,7 +17,7 @@ class MainController extends Controller
         $this->vacationModel = $vacationModel;
     }
 
-    public function indexAction($request, $response)
+    public function index($request, $response)
     {
         $model = $this->vacationModel;
         $data = $model->getData();
@@ -25,7 +25,7 @@ class MainController extends Controller
         return $response;
     }
 
-    public function addAction($request, $response)
+    public function add($request, $response)
     {
             $data = $request->getParsedBody();
 
@@ -39,16 +39,38 @@ class MainController extends Controller
         return $response->withHeader('Location', '/');
     }
 
-    public function editAction($request, $response, $args)
+    public function edit($request, $response, $args)
     {
         $model = $this->vacationModel;
         $model->editCheck($args['id']);
         return $response->withHeader('Location', '/');
     }
 
-    public function loginAction($request, $response)
+    public function login($request, $response)
     {
+        if ($request->getMethod() == 'POST') {
+            $data = $request->getParsedBody();
+            if ($data['username'] == 'admin') {
+                if ($data['password'] == 'admin') {
+                    $_SESSION['logged'] = true;
+                    return $response->withHeader('Location', '/');
+                }
+            }
+        }
         $this->render('login', 'main');
         return $response;
+    }
+
+    public function logout($request, $response)
+    {
+        if ($_SESSION['logged']) {
+            if ($_SESSION['logged']) {
+                $_SESSION = array();
+                return $response->withHeader('Location', '/auth/login');
+            }
+        } else {
+            return $response->withHeader('Location', '/auth/login');
+        }
+            return $response;
     }
 }

@@ -17,8 +17,8 @@ namespace App\Views;
 </head>
 <body>
     <div class='navbar'>
-        <a class='logo' href="">Project</a>
-        <a class='auth' href="/login">Login</a>
+        <a class='logo' href="/">Project</a>
+        <a class='auth' href="/auth/login">Login</a>
     </div>
     <?php require __DIR__ . "/../" . $content . ".php"?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" 

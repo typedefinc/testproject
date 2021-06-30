@@ -3,19 +3,18 @@
 namespace App;
 
 use App\Models\DbConfig;
-use DI\Container;
-use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
 class Model
 {
     public $db;
     public $logger;
 
-    public function __construct(DbConfig $dbConfig, ContainerInterface $container)
+    public function __construct(DbConfig $dbConfig, LoggerInterface $logger)
     {
         // $this->db = new PDO($dbConfig['dsn']);
         $this->db = new \PDO($dbConfig->dsn);
-        $this->logger = $container->get('logger');
+        $this->logger = $logger;
     }
 
     public function get($table, $data = "*")
@@ -24,7 +23,6 @@ class Model
         $result = $this->db->query($sql);
         $this->logger->info('Get data');
         return $result;
-        
     }
 
     public function insert($table, $data = [])
