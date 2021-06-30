@@ -2,6 +2,8 @@
 
 namespace App\Views;
 
+use App\Auth;
+
 ?>
 
 <div class='container'>
@@ -9,6 +11,7 @@ namespace App\Views;
     <h1>Список</h1>
     <h2></h1>
 </div>
+<?php if (!Auth::isAdmin()) :?>
     <form class="form-add" action="/add" method="POST">
     <div class="fieldsstart">
         <div class='fields'>
@@ -26,7 +29,7 @@ namespace App\Views;
     </div>
     <input class="btn btn-success add-button" type="submit" value="Добавить">
 </form>
-
+<?php endif;?>
 <div class='center-block'>
     <table class="table">
     <thead>
@@ -42,7 +45,7 @@ namespace App\Views;
                 <th><?=$list->start;?></th>
                 <th><?=$list->end;?></th>
                 <th>
-                    <?php if (true) : ?>
+                    <?php if (Auth::isAdmin()) : ?>
                             <a class='status' href="/edit/<?=$list->id?>"><?=$list->check ? 'Утвержден' : 'Не утвержден'?></a>
                     <?php else : ?>
                             <?=$list->check ? 'Утвержден' : 'Не утвержден'?>

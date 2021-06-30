@@ -64,4 +64,11 @@ class Model
         $this->db->prepare($sql)->execute();
         $this->logger->info('Query: ' . $sql . '. Change record with id:' . $id);
     }
+
+    public function getUser($table, $username)
+    {
+        $sql = "SELECT * FROM $table WHERE username='$username'";
+        $result = $this->db->query($sql);
+        return $result;
+    }
 }

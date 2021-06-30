@@ -4,17 +4,21 @@ namespace App\Controllers;
 
 use Slim\App;
 use App\Controller;
+use App\Auth;
 use App\Models\VacationModel;
+use App\Models\UserModel;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class MainController extends Controller
 {
     private VacationModel $vacationModel;
+    private UserModel $userModel;
 
-    public function __construct(VacationModel $vacationModel)
+    public function __construct(VacationModel $vacationModel, UserModel $userModel)
     {
         $this->vacationModel = $vacationModel;
+        $this->userModel = $userModel;
     }
 
     public function index($request, $response)
@@ -27,22 +31,27 @@ class MainController extends Controller
 
     public function add($request, $response)
     {
+        if (Auth::isAdmin()) {
             $data = $request->getParsedBody();
 
-        if ($data) {
-            $model = $this->vacationModel;
-            $model->author = 'user';
-            $model->start = $data['start'];
-            $model->end =  $data['end'];
-            $model->save();
+            if ($data) {
+                  $model = $this->vacationModel;
+                  $model->author = 'user';
+                  $model->start = $data['start'];
+                  $model->end =  $data['end'];
+                  $model->save();
+            }
         }
         return $response->withHeader('Location', '/');
     }
 
     public function edit($request, $response, $args)
     {
-        $model = $this->vacationModel;
-        $model->editCheck($args['id']);
+        if (Auth::isAdmin()) {
+            $model = $this->vacationModel;
+            $model->editCheck($args['id']);
+        }
+
         return $response->withHeader('Location', '/');
     }
 
@@ -50,11 +59,16 @@ class MainController extends Controller
     {
         if ($request->getMethod() == 'POST') {
             $data = $request->getParsedBody();
-            if ($data['username'] == 'admin') {
-                if ($data['password'] == 'admin') {
-                    $_SESSION['logged'] = true;
-                    return $response->withHeader('Location', '/');
-                }
+            $model = $this->userModel;
+            if ($model->validate($data['username'], $data['password'])) {
+                $_SESSION['logged'] = true;
+                $user = $model->getInfoUser($data['username']);
+                $_SESSION['uinfo'] = [
+                    'id' => $user->id,
+                    'username' => $user->username,
+                    'role' => $user->role
+                ];
+                return $response->withHeader('Location', '/');
             }
         }
         $this->render('login', 'main');

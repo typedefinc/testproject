@@ -2,9 +2,12 @@
 
 namespace App\Views;
 
+use App\Auth;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,17 +18,24 @@ namespace App\Views;
     <title>Project</title>
 
 </head>
+
 <body>
     <div class='navbar'>
         <a class='logo' href="/">Project</a>
-        <a class='auth' href="/auth/login">Login</a>
+
+        <?= Auth::getName()?>
+
+        <?php if (Auth::isAuth()) :?>
+        <a class='auth' href="/auth/logout">Logout</a>
+        <?php endif;?>
     </div>
     <?php require __DIR__ . "/../" . $content . ".php"?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" 
-        crossorigin="anonymous" 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" crossorigin="anonymous"
         referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"  crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="/asset/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/asset/js/app.js"></script>
 </body>
+
 </html>

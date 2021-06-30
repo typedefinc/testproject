@@ -19,7 +19,9 @@ class ReAuthMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        var_dump($this->storage['logged']);
+        if (!isset($this->storage['logged'])) {
+            $this->storage['logged'] = false;
+        }
         if ($this->storage['logged'] == true) {
             return $handler->handle($request)->withHeader('Location', '/');
         }
